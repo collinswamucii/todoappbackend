@@ -34,13 +34,6 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
-                        // Allow access to Swagger UI and API docs
-                        .requestMatchers(
-                                "/swagger-ui.html",           // Explicitly allow the main Swagger UI page
-                                "/swagger-ui/**",            // Allow all Swagger UI resources
-                                "/v3/api-docs/**",           // Allow OpenAPI JSON
-                                "/v3/api-docs.yaml"          // Allow OpenAPI YAML (if used)
-                        ).permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
